@@ -5,3 +5,7 @@ A command-line tool to check the health status of Snyk projects, including broke
 
 ## Public mirror of the private repo located at ##
 ### https://github.com/snyk-labs/project-health-report ###
+
+## License
+
+MIT
