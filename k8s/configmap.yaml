@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: snyk-config
+  namespace: snyk-manager
+data:
+  #SNYK_GROUP_ID: "your-group-id-here"
+  #SNYK_API_BASE_URL: "https://app.eu.snyk.io"
+  #SNYK_API_VERSION: "2024-10-15"

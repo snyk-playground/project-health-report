@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: snyk-manager
+  namespace: snyk-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: snyk-manager
+  template:
+    metadata:
+      labels:
+        app: snyk-manager
+    spec:
+      containers:
+        - name: snyk-manager
+          image: localhost/snyk-manager:latest
+          imagePullPolicy: Never
+          command: ["/bin/sh", "-c", "sleep 1d"]
+          envFrom:
+            - secretRef:
+                name: snyk-credentials
+            - configMapRef:
+                name: snyk-config
+      restartPolicy: Always

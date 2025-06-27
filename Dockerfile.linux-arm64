@@ -1,0 +1,31 @@
+# Use a lightweight Linux ARM64 base image
+FROM --platform=linux/arm64 alpine:latest
+
+# Install necessary dependencies for running the binary
+RUN apk add --no-cache \
+    libc6-compat \
+    libgcc \
+    libstdc++ \
+    ca-certificates
+
+# Create a non-root user for security
+RUN addgroup -g 1001 -S snyk && \
+    adduser -S snyk -u 1001
+
+# Create app directory
+WORKDIR /app
+
+# Copy the Linux ARM64 binary
+COPY bin/snyk-manager-linux-arm64 /app/snyk-manager
+
+# Make the binary executable
+RUN chmod +x /app/snyk-manager
+
+# Change ownership to the snyk user
+RUN chown snyk:snyk /app/snyk-manager
+
+# Switch to non-root user
+USER snyk
+
+# Set the entrypoint to run the binary
+ENTRYPOINT ["/app/snyk-manager"] 
